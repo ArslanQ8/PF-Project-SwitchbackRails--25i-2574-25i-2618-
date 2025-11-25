@@ -10,7 +10,15 @@
 // ----------------------------------------------------------------------------
 // Returns true if x,y are within bounds.
 // ----------------------------------------------------------------------------
-bool isInBounds() {
+bool isInBounds(int row, int col) {//To check if position is within the max rows and max col.
+    bool check=0;
+
+    if(row>=0 && row<mrow && col>=0 && col<mcol){
+        check=1;
+    }
+
+    return check;
+
 }
 
 // ----------------------------------------------------------------------------
@@ -18,7 +26,21 @@ bool isInBounds() {
 // ----------------------------------------------------------------------------
 // Returns true if the tile can be traversed by trains.
 // ----------------------------------------------------------------------------
-bool isTrackTile() {
+bool isTrackTile(char tile) {
+    bool check=0;
+
+    if(tile==' '|| tile=='\n'){
+        check=1;
+    }
+    if(tile=='-'|| tile=='/' || tile=='\\' || tile=='+'|| tile=='='){//Checks all types of tracks elements
+        check=1;
+    }
+    if(tile=='D'||tile=='S'|| (tile>='A'&& tile<='Z')){//Checks spawn, dest and all switches
+        check=1;
+    }
+
+
+    return check;
 }
 
 // ----------------------------------------------------------------------------
@@ -26,7 +48,14 @@ bool isTrackTile() {
 // ----------------------------------------------------------------------------
 // Returns true if the tile is 'A'..'Z'.
 // ----------------------------------------------------------------------------
-bool isSwitchTile() {
+bool isSwitchTile(char tile) {
+    bool check=0;
+
+    if(tile>='A'&& tile<='Z'){
+        check=1;
+    }
+
+    return check;
 }
 
 // ----------------------------------------------------------------------------
@@ -34,7 +63,14 @@ bool isSwitchTile() {
 // ----------------------------------------------------------------------------
 // Maps 'A'..'Z' to 0..25, else -1.
 // ----------------------------------------------------------------------------
-int getSwitchIndex() {
+int getSwitchIndex(char tile) {
+    if(!(isSwitchTile(tile))){
+        return -1;
+    }
+    int index;
+    index= tile-65;
+
+    return index;
 }
 
 // ----------------------------------------------------------------------------
