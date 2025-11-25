@@ -1,9 +1,11 @@
 #include "app.h"
 #include "../core/simulation_state.h"
 #include "../core/simulation.h"
+#include "../core/grid.h"
 #include "../core/io.h"
 #include <iostream>
 
+using namespace std;
 // ============================================================================
 // MAIN.CPP - Entry point of the application (NO CLASSES)
 // ============================================================================
@@ -20,6 +22,28 @@
 // file or initialize application).
 // ----------------------------------------------------------------------------
 int main() {
+    initializeSimulationState();//Reset all values
+
+    gridrows=3;
+    gridcol=5;
+
+    const char* r[]={"S---D","--A-=","-----"};
+
+    for (int i=0; i<gridrows;i++){
+        for(int j=0; j<gridcol; j++){
+            grid[i][j]=r[i][j];
+        }
+        
+    }
+
+    printingrid(); //to test print our grid
+
+    cout<<"Testing false in bound: "<<isInBounds(5,0)<<endl;
+    cout<<"Testing True in bound: "<<isInBounds(1,3)<<endl;
+
+    cout<<"Testing false Track tile: "<<isTrackTile('{')<<endl;
+    cout<<"Testing True Track Tile: "<<isTrackTile('-')<<endl;
+    
 
     
 }

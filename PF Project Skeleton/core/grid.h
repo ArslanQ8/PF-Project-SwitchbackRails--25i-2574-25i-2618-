@@ -13,7 +13,7 @@ bool isInBounds(int rows, int col);
 
 // Check if a tile is a track (can trains move on it?)
 
-bool isTrackTile(char tile); //Since track tiles are all ASCII Characters like +|\
+bool isTrackTile(char tile); //Since track tiles are all ASCII Characters
 
 // Check if a tile is a switch (A-Z)
 

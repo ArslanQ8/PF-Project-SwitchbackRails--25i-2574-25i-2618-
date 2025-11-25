@@ -1,6 +1,8 @@
 #include "grid.h"
 #include "simulation_state.h"
+#include <iostream>
 
+using namespace std;
 // ============================================================================
 // GRID.CPP - Grid utilities
 // ============================================================================
@@ -13,7 +15,7 @@
 bool isInBounds(int row, int col) {//To check if position is within the max rows and max col.
     bool check=0;
 
-    if(row>=0 && row<mrow && col>=0 && col<mcol){
+    if(row>=0 && row<gridrows && col>=0 && col<gridcol){
         check=1;
     }
 
@@ -30,7 +32,7 @@ bool isTrackTile(char tile) {
     bool check=0;
 
     if(tile==' '|| tile=='\n'){
-        check=1;
+        check=0;
     }
     if(tile=='-'|| tile=='/' || tile=='\\' || tile=='+'|| tile=='='){//Checks all types of tracks elements
         check=1;
@@ -78,7 +80,16 @@ int getSwitchIndex(char tile) {
 // ----------------------------------------------------------------------------
 // Returns true if x,y is a spawn.
 // ----------------------------------------------------------------------------
-bool isSpawnPoint() {
+bool isSpawnPoint(int row, int col) {
+    if(!isInBounds(row,col)){
+        return 0;
+    }
+    
+    int check=0;
+    if(grid[row][col]=='S'){
+        check=1;
+    }
+    return check;
 }
 
 // ----------------------------------------------------------------------------
@@ -86,7 +97,16 @@ bool isSpawnPoint() {
 // ----------------------------------------------------------------------------
 // Returns true if x,y is a destination.
 // ----------------------------------------------------------------------------
-bool isDestinationPoint() {
+bool isDestinationPoint(int row, int col) {
+    if(!isInBounds(row,col)){
+        return 0;
+    }
+    
+    int check=0;
+    if(grid[row][col]=='D'){
+        check=1;
+    }
+    return check;
 }
 
 // ----------------------------------------------------------------------------
@@ -94,5 +114,36 @@ bool isDestinationPoint() {
 // ----------------------------------------------------------------------------
 // Returns true if toggled successfully.
 // ----------------------------------------------------------------------------
-bool toggleSafetyTile() {
+bool toggleSafetyTile(int row,int col) {
+    if(!isInBounds(row,col)){
+        return 0;
+    }
+
+    char *tile=&grid[row][col];
+
+    if(*tile=='='){//If already safety we change it to normal
+        *tile='-';
+        return 1;
+    }
+
+    if(isTrackTile(*tile)){
+        *tile='=';
+        return 1;
+    }
+    return 0;
+
+}
+
+//testing code
+
+void printingrid(){
+    cout<<"Grid "<<gridrows<<" and "<<gridcol<<endl;
+
+    for (int i=0; i<gridrows;i++){
+        for(int j=0; j<gridcol; j++){
+            cout<<grid[i][j];
+        }
+        cout<<endl;
+    }
+
 }
