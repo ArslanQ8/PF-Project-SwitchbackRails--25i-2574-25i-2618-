@@ -9,6 +9,10 @@
 // GRID
 // ----------------------------------------------------------------------------
 
+int gridrows=0;//initializze the variables made in .h file
+int gridcol=0;
+
+char grid[mrow][mcol];
 
 // ----------------------------------------------------------------------------
 // TRAINS
@@ -44,4 +48,13 @@
 // Called before loading a new level.
 // ----------------------------------------------------------------------------
 void initializeSimulationState() {
+    gridrows=0;
+    gridcol=0;
+
+    for(int i=0;i<mrow;i++){
+        for(int j=0;j<mcol;j++){
+            grid[i][j]=' ';
+        }
+    }
+
 }
