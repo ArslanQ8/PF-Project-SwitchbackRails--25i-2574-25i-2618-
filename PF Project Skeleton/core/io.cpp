@@ -5,6 +5,10 @@
 #include <cstring>
 #include <cstdio>
 #include <cstdlib>
+#include <iostream>
+#include <string>//Good when working with strings and used for stoi to convert str to int
+
+using namespace std;
 
 // ============================================================================
 // IO.CPP - Level I/O and logging
@@ -16,6 +20,55 @@
 // Load a .lvl file into global state.
 // ----------------------------------------------------------------------------
 bool loadLevelFile() {
+
+    ifstream in("data/levels/easy_level.lvl");//Reading the file
+    
+    if(!in){
+        cout<<"File Failed to Open"<<endl;
+        return 0;
+    }
+
+    initializeSimulationState();
+
+    string line;
+
+    while(getline(in,line)){
+
+        bool check=1;
+        for(int i=0; i<(int)line.size();i++){
+            if(line[i]!=' '&&line[i]!='\t'&&line[i]!='\r'&&line[i]!='\n'){//checks if the current element is a word or letter
+                check=0;
+                break;
+            }
+        }
+        if(check){ //if string is not word or letter
+            continue;
+        }
+        if(line=="ROWS:"){
+            getline(in,line);//To get items of the next line
+            gridrows=stoi(line);
+        }
+        if(line=="COLS:"){
+            getline(in,line);//To get items of the next line
+            gridcol=stoi(line);
+        }
+        if(line=="MAP:"){
+            break;
+        }
+
+    }
+
+    if(isInBounds(gridrows,gridcol)){
+        for(int i=0; i<gridrows;i++){
+            for(int j=0;j<gridcol;j++){
+                if(j<(int)line.size()){
+                    grid[i][j]=line[j];
+                }
+            }
+        }
+    }
+    return true;
+    
 }
 
 // ----------------------------------------------------------------------------

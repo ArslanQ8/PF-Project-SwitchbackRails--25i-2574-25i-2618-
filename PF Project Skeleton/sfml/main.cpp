@@ -27,23 +27,13 @@ int main() {
     gridrows=3;
     gridcol=5;
 
-    const char* r[]={"S---D","--A-=","-----"};
-
-    for (int i=0; i<gridrows;i++){
-        for(int j=0; j<gridcol; j++){
-            grid[i][j]=r[i][j];
-        }
-        
+    if(!loadLevelFile()){
+        cout<<"Level Failed to load"<<endl;
+        return 0;
     }
 
     printingrid(); //to test print our grid
 
-    cout<<"Testing false in bound: "<<isInBounds(5,0)<<endl;
-    cout<<"Testing True in bound: "<<isInBounds(1,3)<<endl;
-
-    cout<<"Testing false Track tile: "<<isTrackTile('{')<<endl;
-    cout<<"Testing True Track Tile: "<<isTrackTile('-')<<endl;
-    
-
+    return 0;
     
 }

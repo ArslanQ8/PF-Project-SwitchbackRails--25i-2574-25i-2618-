@@ -11,8 +11,8 @@
 // GRID CONSTANTS
 // ----------------------------------------------------------------------------
 
-const int mrow=48;//Assigns Max rows and collumn
-const int mcol=48;
+const int mrow=40;//Assigns Max rows and collumn
+const int mcol=70;
 
 extern int gridrows; //Defining rows and columns that will be used in other files not this one.
 extern int gridcol;

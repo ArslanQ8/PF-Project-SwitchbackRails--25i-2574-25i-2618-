@@ -15,7 +15,7 @@ using namespace std;
 bool isInBounds(int row, int col) {//To check if position is within the max rows and max col.
     bool check=0;
 
-    if(row>=0 && row<gridrows && col>=0 && col<gridcol){
+    if(row>=0 && row<mrow && col>=0 && col<mcol){
         check=1;
     }
 
