@@ -21,7 +21,7 @@ using namespace std;
 // ----------------------------------------------------------------------------
 bool loadLevelFile() {
 
-    ifstream in("data/levels/easy_level.lvl");//Reading the file
+    ifstream in("data/levels/hard_level.lvl");//Reading the file
     
     if(!in){
         cout<<"File Failed to Open"<<endl;
@@ -48,25 +48,39 @@ bool loadLevelFile() {
             getline(in,line);//To get items of the next line
             gridrows=stoi(line);
         }
-        if(line=="COLS:"){
+        else if(line=="COLS:"){
             getline(in,line);//To get items of the next line
             gridcol=stoi(line);
         }
-        if(line=="MAP:"){
+        else if(line=="MAP:"){
             break;
         }
 
     }
+    bool check=0;
 
-    if(isInBounds(gridrows,gridcol)){
-        for(int i=0; i<gridrows;i++){
-            for(int j=0;j<gridcol;j++){
+    if(gridrows>0&&gridrows<=mrow&&gridcol>0&&gridcol<=mcol){ //To check if the rows and col fall inside our limit
+        check=1;
+    }
+    if(check){
+        int tempi;
+        while(getline(in,line)){
+            if(line=="\0"){
+                break;
+            }
+            for(int j=0; j<gridcol;j++){
                 if(j<(int)line.size()){
-                    grid[i][j]=line[j];
+                    grid[tempi][j]=line[j];
                 }
             }
+            tempi++;
         }
+
     }
+    else{
+        cout<<"Invalid Row/Column Size. Try again."<<endl;
+    }
+    in.close();
     return true;
     
 }

@@ -137,7 +137,7 @@ bool toggleSafetyTile(int row,int col) {
 //testing code
 
 void printingrid(){
-    cout<<"Grid "<<gridrows<<" and "<<gridcol<<endl;
+    cout<<"Grid "<<gridrows<<" x "<<gridcol<<endl;
 
     for (int i=0; i<gridrows;i++){
         for(int j=0; j<gridcol; j++){

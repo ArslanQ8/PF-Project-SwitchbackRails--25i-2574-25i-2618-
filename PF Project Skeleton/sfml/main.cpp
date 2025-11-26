@@ -24,9 +24,6 @@ using namespace std;
 int main() {
     initializeSimulationState();//Reset all values
 
-    gridrows=3;
-    gridcol=5;
-
     if(!loadLevelFile()){
         cout<<"Level Failed to load"<<endl;
         return 0;
