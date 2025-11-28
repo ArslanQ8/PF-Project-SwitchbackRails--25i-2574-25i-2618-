@@ -29,16 +29,9 @@ int main() {
         return 0;
     }
 
-    for (int i=0; i<gridrows;i++){
-        for(int j=0; j<gridcol; j++){
-            cout<<grid[i][j];
-        }
-        cout<<endl;
-    }
-
-    cout<<endl;
+    Printgrid();
     
-    for(int i=0;i<16;i++){
+    for(int i=0;i<6;i++){
         cout<<"Current Tick is: "<<currenttick<<endl;
 
         simulateOneTick();

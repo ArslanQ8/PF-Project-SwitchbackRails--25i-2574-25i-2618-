@@ -15,7 +15,7 @@ using namespace std;
 bool isInBounds(int row, int col) {//To check if position is within the max rows and max col.
     bool check=0;
 
-    if(row>=0 && row<mrow && col>=0 && col<mcol){
+    if(row>=2 && row<gridrows && col>=2 && col<gridcol){
         check=1;
     }
 
@@ -132,4 +132,15 @@ bool toggleSafetyTile(int row,int col) {
     }
     return 0;
 
+}
+
+void Printgrid(){
+    for (int i=0; i<gridrows;i++){
+        for(int j=0; j<gridcol; j++){
+            cout<<grid[i][j];
+        }
+        cout<<endl;
+    }
+
+    cout<<endl;
 }

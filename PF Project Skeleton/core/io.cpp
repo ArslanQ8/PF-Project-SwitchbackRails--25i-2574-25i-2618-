@@ -63,7 +63,7 @@ bool loadLevelFile() {
         sizecheck=1;
     }
     if(sizecheck){
-        int tempi=0;
+        int tempi=1;
         while(getline(in,line)){
             if(line=="\0"){
                 break;
