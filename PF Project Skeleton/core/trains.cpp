@@ -19,28 +19,50 @@
 // ----------------------------------------------------------------------------
 void spawnTrainsForTick() {
     for(int i=0; i<ntrain;i++){
-        if(ttick[i]==currenttick){
+        if(isspawned[i]){
+            continue;
+        }
+        
+        if(currenttick<ttick[i]){//Adding Spawn check rules
+            continue;
+        }
 
-            int slot =-1;
-            for(int j=0; j<mtrains;j++){
-                if(!trainisact[j]){//if it finds a slot that is not active it takes that place
-                    slot=j;
-                    break;
-                }
-            }
-            if(slot==-1){//if doesnt find slot
-                continue;
-            }
-            trainisact[slot]=1;
-            actrow[slot]=trow[i];
-            actcol[slot]=tcol[i];
-            actdir[ slot]=tdir[i];
-            actcolour[slot]=tcolour[i];
+        int sr=trow[i];//Spawn row
+        int sc=tcol[i];
 
-            if(slot>=numacttrain){//counts no. of trains that are on the grid active
-                numacttrain=slot+1;
+        bool occu=0;
+        for(int j=0;j<numacttrain;j++){
+            if(trainisact[j]&&actrow[j]==sr&&actcol[j]==sc){ //Checks all active trains then verifies rows and column are same or not
+                occu=1;
+                break;
             }
         }
+        if(occu){//Moves to next tick when the current spawn tick is occupied
+            continue;
+        }
+
+        int slot =-1;
+        for(int j=0; j<mtrains;j++){
+            if(!trainisact[j]){//if it finds a slot that is not active it takes that place
+                slot=j;
+                break;
+            }
+        }
+        if(slot==-1){//if doesnt find slot
+            continue;
+        }
+        trainisact[slot]=1;
+        actrow[slot]=trow[i];
+        actcol[slot]=tcol[i];
+        actdir[ slot]=tdir[i];
+        actcolour[slot]=tcolour[i];
+
+        if(slot>=numacttrain){//counts no. of trains that are on the grid active
+            numacttrain=slot+1;
+        }
+
+        isspawned[i]=1;
+    
     }
 }
 
@@ -98,6 +120,23 @@ void detectCollisions() {
 // Mark trains that reached destinations.
 // ----------------------------------------------------------------------------
 void checkArrivals() {
+    for(int i=0;i<numacttrain;i++){
+        if(!trainisact[i]){
+            continue;
+        }
+
+        int r=actrow[i];
+        int c=actcol[i];
+        if(isDestinationPoint(r,c)){
+            trainisact[i]=0;
+            countarrived++;
+
+        }
+
+    }
+    while(numacttrain>0&& !trainisact[numacttrain-1]){//Reduces number of active train count when if the last index is inactive
+        numacttrain--;
+    }
 }
 
 // ----------------------------------------------------------------------------

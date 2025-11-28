@@ -50,15 +50,11 @@ void simulateOneTick() {
 
         if(!isInBounds(r,c)){//Checks if new value is within the grid
             trainisact[i]=0;
+            countcrashed++;
             continue;
         }
 
         char tile= grid[r][c];
-
-        if(isDestinationPoint(r,c)){
-            trainisact[i]=false;
-            continue;
-        }
 
         if(isTrackTile(tile)){
             actrow[i]=r;
@@ -66,9 +62,11 @@ void simulateOneTick() {
         }
         else{
             trainisact[i]=0;
+            countcrashed++;
         }
 
     }
+    checkArrivals();
 
     currenttick+=1;
 }
@@ -78,4 +76,17 @@ void simulateOneTick() {
 // ----------------------------------------------------------------------------
 
 bool isSimulationComplete() {
+
+    bool checkcomplete=1;
+
+    if(currenttick<=lasttick){
+        checkcomplete= 0;
+    }
+
+    for(int i=0; i<numacttrain;i++){
+        if(trainisact[i]){
+            checkcomplete= 0;
+        }
+    }
+    return checkcomplete;
 }

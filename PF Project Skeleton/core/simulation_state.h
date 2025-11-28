@@ -59,6 +59,8 @@ extern int tcol[mtrains];
 extern int tdir[mtrains];
 extern int tcolour[mtrains];
 
+extern bool isspawned[mtrains];
+
 //for trains that are in the grid and moving
 
 extern int numacttrain;
@@ -70,7 +72,7 @@ extern int actcol[mtrains];
 extern int actdir[mtrains];
 extern int actcolour[mtrains];
 
-
+extern int lasttick;
 
 // ----------------------------------------------------------------------------
 // GLOBAL STATE: SWITCHES (A-Z mapped to 0-25)
@@ -96,6 +98,8 @@ extern int actcolour[mtrains];
 // GLOBAL STATE: METRICS
 // ----------------------------------------------------------------------------
 
+extern int countarrived;
+extern int countcrashed;
 
 // ----------------------------------------------------------------------------
 // GLOBAL STATE: EMERGENCY HALT

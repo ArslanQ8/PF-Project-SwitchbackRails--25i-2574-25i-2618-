@@ -110,6 +110,10 @@ bool loadLevelFile() {
         tcol[ntrain]=col;
         tdir[ntrain]=dir;
         tcolour[ntrain]=colour;
+
+        if(tick>lasttick){
+            lasttick=tick;
+        }
         
         ntrain++;
     }

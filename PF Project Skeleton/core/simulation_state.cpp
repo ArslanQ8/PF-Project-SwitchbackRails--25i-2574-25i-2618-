@@ -26,6 +26,8 @@ int tcol[mtrains];
 int tdir[mtrains];
 int tcolour[mtrains];
 
+bool isspawned[mtrains];
+
 
 int actrow[mtrains];//Active trains on grid variables
 int currenttick=0;
@@ -34,6 +36,8 @@ bool trainisact[mtrains];
 int actcol[mtrains];
 int actdir[mtrains];
 int actcolour[mtrains];
+
+int lasttick=0;
 
 // ----------------------------------------------------------------------------
 // SWITCHES
@@ -50,6 +54,9 @@ int actcolour[mtrains];
 // ----------------------------------------------------------------------------
 // METRICS
 // ----------------------------------------------------------------------------
+
+int countarrived=0;
+int countcrashed=0;
 
 // ----------------------------------------------------------------------------
 // EMERGENCY HALT
@@ -82,17 +89,19 @@ void initializeSimulationState() {
         tcol[i]=0;
         tdir[i]=0;
         tcolour[i]=0;
-    }
-
-    currenttick=0;
-    numacttrain=0;
-
-    for(int i=0; i<mtrains;i++){
         actrow[i]=0;
         actcol[i]=0;
         actdir[i]=0;
         actcolour[i]=0;
         trainisact[i]=0;
+        isspawned[i]=0;
     }
+
+    currenttick=0;
+    lasttick=0;
+    numacttrain=0;
+
+    countarrived=0;
+    countcrashed=0;
 
 }
