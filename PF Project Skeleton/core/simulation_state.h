@@ -52,12 +52,23 @@ const int mtrains=32;
 // ----------------------------------------------------------------------------
 
 extern int ntrain;
-
+//for getting train values from level files.
 extern int ttick[mtrains];
 extern int trow[mtrains];
 extern int tcol[mtrains];
 extern int tdir[mtrains];
 extern int tcolour[mtrains];
+
+//for trains that are in the grid and moving
+
+extern int numacttrain;
+
+extern int currenttick;
+extern bool trainisact[mtrains];
+extern int actrow[mtrains];
+extern int actcol[mtrains];
+extern int actdir[mtrains];
+extern int actcolour[mtrains];
 
 
 

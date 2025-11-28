@@ -37,9 +37,18 @@ int main() {
     }
 
     cout<<endl;
-    cout<<"No. of trains: "<<ntrain<<endl;
-    for(int i=0;i<ntrain;i++){
-        cout<<"Train: "<<i+1<<" Tick= "<<ttick[i]<<" Position="<<trow[i]<<","<<tcol[i]<<" Direction: "<<tdir[i]<<" colour= "<<tcolour[i]<<endl;
+    
+    for(int i=0;i<16;i++){
+        cout<<"Current Tick is: "<<currenttick<<endl;
+
+        simulateOneTick();
+        cout<<"active Trains"<<endl;
+        for(int j=0;j<numacttrain;j++){
+            if(trainisact[j]){
+                cout<<"Slot is "<<j<<" at "<<actrow[j]<<" and "<<actcol[j]<<" Direction is: "<<actdir[j]<<" And colour is: "<<actcolour[j]<<endl;
+            }
+        }
+
     }
 
     return 0;

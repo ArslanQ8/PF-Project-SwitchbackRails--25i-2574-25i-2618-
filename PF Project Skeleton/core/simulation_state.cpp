@@ -20,13 +20,20 @@ char grid[mrow][mcol];
 
 int ntrain=0;
 
-int ttick[mtrains];
+int ttick[mtrains];//Train variables
 int trow[mtrains];
 int tcol[mtrains];
 int tdir[mtrains];
 int tcolour[mtrains];
 
 
+int actrow[mtrains];//Active trains on grid variables
+int currenttick=0;
+int numacttrain=0;
+bool trainisact[mtrains];
+int actcol[mtrains];
+int actdir[mtrains];
+int actcolour[mtrains];
 
 // ----------------------------------------------------------------------------
 // SWITCHES
@@ -75,6 +82,17 @@ void initializeSimulationState() {
         tcol[i]=0;
         tdir[i]=0;
         tcolour[i]=0;
+    }
+
+    currenttick=0;
+    numacttrain=0;
+
+    for(int i=0; i<mtrains;i++){
+        actrow[i]=0;
+        actcol[i]=0;
+        actdir[i]=0;
+        actcolour[i]=0;
+        trainisact[i]=0;
     }
 
 }

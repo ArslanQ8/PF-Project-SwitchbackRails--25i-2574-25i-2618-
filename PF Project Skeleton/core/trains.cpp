@@ -18,6 +18,30 @@
 // Activate trains scheduled for this tick.
 // ----------------------------------------------------------------------------
 void spawnTrainsForTick() {
+    for(int i=0; i<ntrain;i++){
+        if(ttick[i]==currenttick){
+
+            int slot =-1;
+            for(int j=0; j<mtrains;j++){
+                if(!trainisact[j]){//if it finds a slot that is not active it takes that place
+                    slot=j;
+                    break;
+                }
+            }
+            if(slot==-1){//if doesnt find slot
+                continue;
+            }
+            trainisact[slot]=1;
+            actrow[slot]=trow[i];
+            actcol[slot]=tcol[i];
+            actdir[ slot]=tdir[i];
+            actcolour[slot]=tcolour[i];
+
+            if(slot>=numacttrain){//counts no. of trains that are on the grid active
+                numacttrain=slot+1;
+            }
+        }
+    }
 }
 
 // ----------------------------------------------------------------------------
