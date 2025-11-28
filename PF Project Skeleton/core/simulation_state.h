@@ -23,6 +23,7 @@ extern char grid[mrow][mcol];
 // TRAIN CONSTANTS
 // ----------------------------------------------------------------------------
 
+const int mtrains=32;
 
 // ----------------------------------------------------------------------------
 // SWITCH CONSTANTS
@@ -49,6 +50,15 @@ extern char grid[mrow][mcol];
 // ----------------------------------------------------------------------------
 // GLOBAL STATE: TRAINS
 // ----------------------------------------------------------------------------
+
+extern int ntrain;
+
+extern int ttick[mtrains];
+extern int trow[mtrains];
+extern int tcol[mtrains];
+extern int tdir[mtrains];
+extern int tcolour[mtrains];
+
 
 
 // ----------------------------------------------------------------------------

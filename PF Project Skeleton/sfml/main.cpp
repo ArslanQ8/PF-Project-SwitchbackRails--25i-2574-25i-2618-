@@ -29,7 +29,18 @@ int main() {
         return 0;
     }
 
-    printingrid(); //to test print our grid
+    for (int i=0; i<gridrows;i++){
+        for(int j=0; j<gridcol; j++){
+            cout<<grid[i][j];
+        }
+        cout<<endl;
+    }
+
+    cout<<endl;
+    cout<<"No. of trains: "<<ntrain<<endl;
+    for(int i=0;i<ntrain;i++){
+        cout<<"Train: "<<i+1<<" Tick= "<<ttick[i]<<" Position="<<trow[i]<<","<<tcol[i]<<" Direction: "<<tdir[i]<<" colour= "<<tcolour[i]<<endl;
+    }
 
     return 0;
     

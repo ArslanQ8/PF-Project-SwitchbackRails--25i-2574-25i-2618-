@@ -34,14 +34,14 @@ bool loadLevelFile() {
 
     while(getline(in,line)){
 
-        bool check=1;
+        bool gcheck=1;
         for(int i=0; i<(int)line.size();i++){
-            if(line[i]!=' '&&line[i]!='\t'&&line[i]!='\r'&&line[i]!='\n'){//checks if the current element is a word or letter
-                check=0;
+            if(line[i]!=' '&&line[i]!='\t'&&line[i]!='\r'&&line[i]!='\n'){//checks if the line contains letters or not, becomes false when finds a letter so the if statement doesnt work
+                gcheck=0;
                 break;
             }
         }
-        if(check){ //if string is not word or letter
+        if(gcheck){ //if string does not contain letters or is empty then it skips the current line
             continue;
         }
         if(line=="ROWS:"){
@@ -57,12 +57,12 @@ bool loadLevelFile() {
         }
 
     }
-    bool check=0;
+    bool sizecheck=0;
 
     if(gridrows>0&&gridrows<=mrow&&gridcol>0&&gridcol<=mcol){ //To check if the rows and col fall inside our limit
-        check=1;
+        sizecheck=1;
     }
-    if(check){
+    if(sizecheck){
         int tempi=0;
         while(getline(in,line)){
             if(line=="\0"){
@@ -80,6 +80,43 @@ bool loadLevelFile() {
     else{
         cout<<"Invalid Row/Column Size. Try again."<<endl;
     }
+
+    //for trains
+
+    while(getline(in,line)){
+
+        bool tcheck=1;
+        for(int i=0; i<(int)line.size();i++){
+            if(line[i]!=' '&&line[i]!='\t'&&line[i]!='\r'&&line[i]!='\n'){//checks if the line contains letters or not, becomes false when finds a letter so the if statement doesnt work
+                tcheck=0;
+                break;
+            }
+        }
+        if(tcheck){ //if string does not contain letters or is empty then it skips the current line
+            continue;
+        }
+        if(line=="TRAINS:"){//loop breaks when we find the trains line
+            break;
+        }
+    }
+
+    ntrain=0;
+    int tick,row,col,dir,colour;
+
+    while(ntrain<mtrains && (in>>tick>>row>>col>>dir>>colour)){//works when the line assigns int value to every variable, stops when it doesnt. also check with max no. of trains. Continues going to the next line as >> skips white spaces and \n.
+
+        ttick[ntrain]=tick;
+        trow[ntrain]=row;
+        tcol[ntrain]=col;
+        tdir[ntrain]=dir;
+        tcolour[ntrain]=colour;
+        
+        ntrain++;
+    }
+
+
+
+
     in.close();
     return true;
     

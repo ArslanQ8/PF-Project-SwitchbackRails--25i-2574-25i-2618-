@@ -32,6 +32,5 @@ bool isDestinationPoint(int row, int col);
 // Returns true if successful
 bool toggleSafetyTile(int row, int col);
 
-void printingrid();//For printing Grid in terminal
 
 #endif
