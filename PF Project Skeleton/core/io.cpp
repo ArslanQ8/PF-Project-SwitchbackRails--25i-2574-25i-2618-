@@ -44,13 +44,34 @@ bool loadLevelFile() {
         if(gcheck){ //if string does not contain letters or is empty then it skips the current line
             continue;
         }
-        if(line=="ROWS:"){
+
+        if(line=="NAME:"){
+            getline(in,line);//To get items of the next line
+            cout<<"Name: \n"<<line<<endl;
+        }
+        else if(line=="ROWS:"){
             getline(in,line);//To get items of the next line
             gridrows=stoi(line);
         }
         else if(line=="COLS:"){
             getline(in,line);//To get items of the next line
             gridcol=stoi(line);
+        }
+        else if(line=="SEED:"){
+            getline(in,line);//To get items of the next line
+            cout<<"Seed: \n"<<line<<endl;
+        }
+        else if(line=="WEATHER:"){
+            getline(in,line);//To get items of the next line
+            if(line=="NORMAL"){
+                weather=0;
+            }
+            else if(line=="RAIN"){
+                weather=1;
+            }
+            else if(line=="FOG"){
+                weather=2;
+            }
         }
         else if(line=="MAP:"){
             break;
@@ -65,7 +86,7 @@ bool loadLevelFile() {
     if(sizecheck){
         int tempi=1;
         while(getline(in,line)){
-            if(line=="\0"){
+            if(line=="SWITCHES:"){
                 break;
             }
             for(int j=0; j<gridcol;j++){
@@ -81,7 +102,7 @@ bool loadLevelFile() {
         cout<<"Invalid Row/Column Size. Try again."<<endl;
     }
 
-    //for trains
+    //for switches and trains
 
     while(getline(in,line)){
 
@@ -95,7 +116,33 @@ bool loadLevelFile() {
         if(tcheck){ //if string does not contain letters or is empty then it skips the current line
             continue;
         }
-        if(line=="TRAINS:"){//loop breaks when we find the trains line
+        if(line=="SWITCHES:"){
+            
+            char letter;
+            string mode;
+            int init,up,right,down,left;
+            string state0,state1;
+            while(in>>letter>>mode>>init>>up>>right>>down>>left>>state0>>state1){
+                int index= getSwitchIndex(letter);
+                if(index>=0&&index<mswitches){
+                    if(mode=="Global"){
+                        smode[index]=1;
+                    }
+                    else{
+                        smode[index]=0;
+                    }
+                    sk_up[index]=up;
+                    sk_down[index]=down;
+                    sk_left[index]=left;
+                    sk_right[index]=right;
+
+                    sk_Global[index]=up;
+
+                    sstate[index]=init;
+                }
+            }   
+        }
+        if(line=="TRAINS:"){
             break;
         }
     }

@@ -39,11 +39,30 @@ int actcolour[mtrains];
 
 int lasttick=0;
 
-bool justspawned[mtrains];
+int weather=0;
+
 // ----------------------------------------------------------------------------
 // SWITCHES
 // ----------------------------------------------------------------------------
 
+int smode[mswitches];
+
+int sk_up[mswitches];
+int sk_right[mswitches];
+int sk_left[mswitches];
+int sk_down[mswitches];
+
+int countsk_up[mswitches];
+int countsk_right[mswitches];
+int countsk_left[mswitches];
+int countsk_down[mswitches];
+
+int sk_Global[mswitches];
+int countsk_Global[mswitches];
+
+int sstate[mswitches];
+
+bool nextwillFlip[mswitches];
 // ----------------------------------------------------------------------------
 // SPAWN AND DESTINATION POINTS
 // ----------------------------------------------------------------------------
@@ -96,8 +115,8 @@ void initializeSimulationState() {
         actcolour[i]=0;
         trainisact[i]=0;
         isspawned[i]=0;
-        justspawned[i]=0;
     }
+    weather=0;
 
     currenttick=0;
     lasttick=0;
@@ -105,5 +124,22 @@ void initializeSimulationState() {
 
     countarrived=0;
     countcrashed=0;
+
+    for(int i=0;i<mswitches;i++){
+        smode[i]=0;
+        sstate[i]=0;
+        sk_up[i]=0;
+        sk_down[i]=0;
+        sk_left[i]=0;
+        sk_right[i]=0;
+        countsk_up[i]=0;
+        countsk_down[i]=0;
+        countsk_left[i]=0;
+        countsk_right[i]=0;
+
+        sk_Global[i]=0;
+        countsk_Global[i]=0;
+        nextwillFlip[i]=0;
+    }
 
 }

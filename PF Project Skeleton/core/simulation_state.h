@@ -14,11 +14,6 @@
 const int mrow=40;//Assigns Max rows and collumn
 const int mcol=70;
 
-extern int gridrows; //Defining rows and columns that will be used in other files not this one.
-extern int gridcol;
-
-extern char grid[mrow][mcol];
-
 // ----------------------------------------------------------------------------
 // TRAIN CONSTANTS
 // ----------------------------------------------------------------------------
@@ -29,11 +24,13 @@ const int mtrains=32;
 // SWITCH CONSTANTS
 // ----------------------------------------------------------------------------
 
+const int mswitches=26;
 
 // ----------------------------------------------------------------------------
 // WEATHER CONSTANTS
 // ----------------------------------------------------------------------------
 
+extern int weather;
 
 // ----------------------------------------------------------------------------
 // SIGNAL CONSTANTS
@@ -45,6 +42,12 @@ const int mtrains=32;
 // ----------------------------------------------------------------------------
 // GLOBAL STATE: GRID
 // ----------------------------------------------------------------------------
+
+
+extern int gridrows; //Defining rows and columns that will be used in other files not this one.
+extern int gridcol;
+
+extern char grid[mrow][mcol];
 
 
 // ----------------------------------------------------------------------------
@@ -74,12 +77,28 @@ extern int actcolour[mtrains];
 
 extern int lasttick;
 
-extern bool justspawned[mtrains];
-
 // ----------------------------------------------------------------------------
 // GLOBAL STATE: SWITCHES (A-Z mapped to 0-25)
 // ----------------------------------------------------------------------------
 
+extern int smode[mswitches];
+
+extern int sk_up[mswitches];
+extern int sk_right[mswitches];
+extern int sk_left[mswitches];
+extern int sk_down[mswitches];
+
+extern int sk_Global[mswitches];
+extern int countsk_Global[mswitches];
+
+extern int countsk_up[mswitches];
+extern int countsk_right[mswitches];
+extern int countsk_left[mswitches];
+extern int countsk_down[mswitches];
+
+extern int sstate[mswitches];
+
+extern bool nextwillFlip[mswitches];
 
 // ----------------------------------------------------------------------------
 // GLOBAL STATE: SPAWN POINTS

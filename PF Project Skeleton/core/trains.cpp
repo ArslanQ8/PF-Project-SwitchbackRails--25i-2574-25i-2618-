@@ -42,7 +42,7 @@ void spawnTrainsForTick() {
         }
 
         int slot =-1;
-        for(int j=0; j<mtrains;j++){
+        for(int j=i; j<mtrains;j++){
             if(!trainisact[j]){//if it finds a slot that is not active it takes that place
                 slot=j;
                 break;
@@ -56,8 +56,6 @@ void spawnTrainsForTick() {
         actcol[slot]=tcol[i];
         actdir[ slot]=tdir[i];
         actcolour[slot]=tcolour[i];
-
-        justspawned[slot]=1;
 
         if(slot>=numacttrain){//counts no. of trains that are on the grid active
             numacttrain=slot+1;

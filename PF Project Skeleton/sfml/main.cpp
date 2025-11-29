@@ -29,22 +29,23 @@ int main() {
         return 0;
     }
 
-    Printgrid();
+    printGrid();
     
     for(int i=0;i<40;i++){
-        cout<<"Current Tick is: "<<currenttick<<endl;
+        cout<<"Tick is: "<<currenttick<<endl;
+        printGrid();
 
-        simulateOneTick();
-        cout<<"active Trains"<<endl;
+        
         for(int j=0;j<numacttrain;j++){
             if(trainisact[j]){
-                cout<<"Slot is "<<j<<" at "<<actrow[j]<<" and "<<actcol[j]<<" Direction is: "<<actdir[j]<<" And colour is: "<<actcolour[j]<<endl;
+                cout<<"Train "<<j+1<<" is at ("<<actrow[j]<<","<<actcol[j]<<") Direction is: "<<actdir[j]<<" And colour is: "<<actcolour[j]<<endl;
             }
         }
-        cout<<endl;
+        simulateOneTick();
+        cout<<"------------------------------------------------------------------------------------------"<<endl;
 
         if(isSimulationComplete()){
-        cout<<"Simulation Complete at tick "<<currenttick;
+        cout<<"Simulation Complete at Tick: "<<currenttick;
 
         cout<<" Arrived = "<<countarrived<<" Crashed= "<<countcrashed<<endl;
         break;
