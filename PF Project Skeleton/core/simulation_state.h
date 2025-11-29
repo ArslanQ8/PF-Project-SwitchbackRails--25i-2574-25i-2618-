@@ -74,6 +74,8 @@ extern int actcolour[mtrains];
 
 extern int lasttick;
 
+extern bool justspawned[mtrains];
+
 // ----------------------------------------------------------------------------
 // GLOBAL STATE: SWITCHES (A-Z mapped to 0-25)
 // ----------------------------------------------------------------------------

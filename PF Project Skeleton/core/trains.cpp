@@ -57,6 +57,8 @@ void spawnTrainsForTick() {
         actdir[ slot]=tdir[i];
         actcolour[slot]=tcolour[i];
 
+        justspawned[slot]=1;
+
         if(slot>=numacttrain){//counts no. of trains that are on the grid active
             numacttrain=slot+1;
         }

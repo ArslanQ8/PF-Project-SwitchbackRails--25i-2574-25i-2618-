@@ -39,6 +39,7 @@ int actcolour[mtrains];
 
 int lasttick=0;
 
+bool justspawned[mtrains];
 // ----------------------------------------------------------------------------
 // SWITCHES
 // ----------------------------------------------------------------------------
@@ -95,6 +96,7 @@ void initializeSimulationState() {
         actcolour[i]=0;
         trainisact[i]=0;
         isspawned[i]=0;
+        justspawned[i]=0;
     }
 
     currenttick=0;

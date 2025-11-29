@@ -31,6 +31,10 @@ void simulateOneTick() {
         if(!trainisact[i]){
             continue;
         }
+        if(justspawned[i]){
+            justspawned[i]=0;
+            continue;
+        }
 
         int r= actrow[i];
         int c=actcol[i];
