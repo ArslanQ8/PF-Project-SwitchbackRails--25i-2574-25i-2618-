@@ -31,6 +31,52 @@ void simulateOneTick() {
         if(!trainisact[i]){
             continue;
         }
+        char ctile=grid[actrow[i]][actcol[i]];
+
+        if(isSwitchTile(ctile)){
+            int index =getSwitchIndex(ctile);
+            if(index>=0&&index<mswitches){
+                if(smode[index]==0){//For per Dir mode
+                    if(actdir[i]==dir_up){
+                        countsk[index]++;
+                        if(sk_up[index]>0 &&(countsk[index]>=sk_up[index])){
+                            nextwillFlip[index]=1;
+                            countsk[index]=0;
+                        }
+                    }
+                    else if(actdir[i]==dir_right){
+                        countsk[index]++;
+                        if(sk_right[index]>0 &&(countsk[index]>=sk_right[index])){
+                            nextwillFlip[index]=1;
+                            countsk[index]=0;
+                        }
+                    }
+                    else if(actdir[i]==dir_down){
+                        countsk[index]++;
+                        if(sk_down[index]>0 &&(countsk[index]>=sk_down[index])){
+                            nextwillFlip[index]=1;
+                            countsk[index]=0;
+                        }
+                    }
+                    else if(actdir[i]==dir_left){
+                        countsk[index]++;
+                        if(sk_left[index]>0 &&(countsk[index]>=sk_left[index])){
+                            nextwillFlip[index]=1;
+                            countsk[index]=0;
+                        }
+                    }
+                }
+                else{//For Global
+                    countsk_Global[index]++;
+                    if(sk_Global[index]>0 &&(countsk_Global[index]>=sk_Global[index])){
+                        nextwillFlip[index]=1;
+                        countsk_Global[index]=0;
+                    }
+                }
+
+                actdir[i]=getSwitchStateForDirection(index,actdir[i]);//Gets new direction, if state gets updated when count reaches the K value
+            }
+        }
 
         int r= actrow[i];
         int c=actcol[i];
@@ -68,6 +114,7 @@ void simulateOneTick() {
     }
     checkArrivals();
 
+    applyDeferredFlips();
     currenttick+=1;
 }
 

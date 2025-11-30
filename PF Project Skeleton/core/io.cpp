@@ -19,9 +19,9 @@ using namespace std;
 // ----------------------------------------------------------------------------
 // Load a .lvl file into global state.
 // ----------------------------------------------------------------------------
-bool loadLevelFile() {
+bool loadLevelFile(const string& filename) {
 
-    ifstream in("data/levels/hard_level.lvl");//Reading the file
+    ifstream in(filename);//Reading the file
     
     if(!in){
         cout<<"File Failed to Open"<<endl;
@@ -84,17 +84,33 @@ bool loadLevelFile() {
         sizecheck=1;
     }
     if(sizecheck){
-        int tempi=1;
-        while(getline(in,line)){
-            if(line=="SWITCHES:"){
-                break;
-            }
-            for(int j=0; j<gridcol;j++){
-                if(j<(int)line.size()){
-                    grid[tempi][j]=line[j];
+        if(filename=="data/levels/complex_network.lvl"){
+            int tempi=0;
+            while(getline(in,line)){
+                if(line=="SWITCHES:"){
+                    break;
                 }
+                for(int j=0; j<gridcol;j++){
+                    if(j<(int)line.size()){
+                        grid[tempi][j]=line[j];
+                    }
+                }
+                tempi++;
             }
-            tempi++;
+        }
+        else{
+            int tempi=1;
+            while(getline(in,line)){
+                if(line=="SWITCHES:"){
+                    break;
+                }
+                for(int j=0; j<gridcol;j++){
+                    if(j<(int)line.size()){
+                        grid[tempi][j]=line[j];
+                    }
+                }
+                tempi++;
+            }
         }
 
     }
@@ -102,55 +118,46 @@ bool loadLevelFile() {
         cout<<"Invalid Row/Column Size. Try again."<<endl;
     }
 
-    //for switches and trains
+    //for switches
 
-    while(getline(in,line)){
-
-        bool tcheck=1;
-        for(int i=0; i<(int)line.size();i++){
-            if(line[i]!=' '&&line[i]!='\t'&&line[i]!='\r'&&line[i]!='\n'){//checks if the line contains letters or not, becomes false when finds a letter so the if statement doesnt work
-                tcheck=0;
-                break;
-            }
-        }
-        if(tcheck){ //if string does not contain letters or is empty then it skips the current line
-            continue;
-        }
-        if(line=="SWITCHES:"){
-            
-            char letter;
-            string mode;
-            int init,up,right,down,left;
-            string state0,state1;
-            while(in>>letter>>mode>>init>>up>>right>>down>>left>>state0>>state1){
-                int index= getSwitchIndex(letter);
-                if(index>=0&&index<mswitches){
-                    if(mode=="Global"){
-                        smode[index]=1;
-                    }
-                    else{
-                        smode[index]=0;
-                    }
-                    sk_up[index]=up;
-                    sk_down[index]=down;
-                    sk_left[index]=left;
-                    sk_right[index]=right;
-
-                    sk_Global[index]=up;
-
-                    sstate[index]=init;
-                }
-            }   
-        }
-        if(line=="TRAINS:"){
+    string check;
+    while(in>>check){
+        if(check=="TRAINS:"){
             break;
         }
+    
+        char letter=check[0];//Since we are already taking in the first string. so to get letter we take 1st index
+        string mode;
+        int init,up,right,down,left;
+        string state0,state1;
+        in>>mode>>init>>up>>right>>down>>left>>state0>>state1;
+
+        int index= getSwitchIndex(letter);
+        if(index>=0&&index<mswitches){
+            if(mode=="GLOBAL"){
+                smode[index]=1;
+            }
+            else{
+                smode[index]=0;
+            }
+            sk_up[index]=up;
+            sk_down[index]=down;
+            sk_left[index]=left;
+            sk_right[index]=right;
+
+            sk_Global[index]=up;
+
+            sstate[index]=init;
+        }
+         
+    
     }
 
+    //For Trains
     ntrain=0;
     int tick,row,col,dir,colour;
 
-    while(ntrain<mtrains && (in>>tick>>row>>col>>dir>>colour)){//works when the line assigns int value to every variable, stops when it doesnt. also check with max no. of trains. Continues going to the next line as >> skips white spaces and \n.
+    while(ntrain<mtrains && (in>>tick>>col>>row>>dir>>colour)){//works when the line assigns int value to every variable, stops when it doesnt. also check with max no. of trains. Continues going to the next line as >> skips white spaces and \n.
 
         ttick[ntrain]=tick;
         trow[ntrain]=row;

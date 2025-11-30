@@ -26,11 +26,6 @@ int getNextDirection();
 // Choose best direction at a crossing.
 int getSmartDirectionAtCrossing();
 
-const int dir_up=0;
-const int dir_right=1;
-const int dir_down=2;
-const int dir_left=3;
-
 // ----------------------------------------------------------------------------
 // TRAIN MOVEMENT
 // ----------------------------------------------------------------------------

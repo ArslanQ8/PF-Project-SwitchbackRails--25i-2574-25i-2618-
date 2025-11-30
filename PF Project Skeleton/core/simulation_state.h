@@ -20,6 +20,12 @@ const int mcol=70;
 
 const int mtrains=32;
 
+const int dir_up=0;
+const int dir_right=1;
+const int dir_down=2;
+const int dir_left=3;
+
+
 // ----------------------------------------------------------------------------
 // SWITCH CONSTANTS
 // ----------------------------------------------------------------------------
@@ -91,11 +97,7 @@ extern int sk_down[mswitches];
 extern int sk_Global[mswitches];
 extern int countsk_Global[mswitches];
 
-extern int countsk_up[mswitches];
-extern int countsk_right[mswitches];
-extern int countsk_left[mswitches];
-extern int countsk_down[mswitches];
-
+extern int countsk[mswitches];
 extern int sstate[mswitches];
 
 extern bool nextwillFlip[mswitches];

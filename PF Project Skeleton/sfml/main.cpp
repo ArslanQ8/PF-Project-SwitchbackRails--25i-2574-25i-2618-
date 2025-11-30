@@ -21,17 +21,18 @@ using namespace std;
 // statistics. Returns 0 on success, 1 on error (e.g., failed to load level
 // file or initialize application).
 // ----------------------------------------------------------------------------
-int main() {
+int main(int arg, char* ar[]) {
+    string lvl=ar[1];
     initializeSimulationState();//Reset all values
 
-    if(!loadLevelFile()){
+    if(!loadLevelFile(lvl)){
         cout<<"Level Failed to load"<<endl;
         return 0;
     }
 
     printGrid();
     
-    for(int i=0;i<40;i++){
+    for(int i=0;i<100;i++){
         cout<<"Tick is: "<<currenttick<<endl;
         printGrid();
 

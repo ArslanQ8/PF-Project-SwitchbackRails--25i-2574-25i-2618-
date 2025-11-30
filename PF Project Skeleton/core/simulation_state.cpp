@@ -52,10 +52,7 @@ int sk_right[mswitches];
 int sk_left[mswitches];
 int sk_down[mswitches];
 
-int countsk_up[mswitches];
-int countsk_right[mswitches];
-int countsk_left[mswitches];
-int countsk_down[mswitches];
+int countsk[mswitches];
 
 int sk_Global[mswitches];
 int countsk_Global[mswitches];
@@ -132,10 +129,7 @@ void initializeSimulationState() {
         sk_down[i]=0;
         sk_left[i]=0;
         sk_right[i]=0;
-        countsk_up[i]=0;
-        countsk_down[i]=0;
-        countsk_left[i]=0;
-        countsk_right[i]=0;
+        countsk[i]=0;
 
         sk_Global[i]=0;
         countsk_Global[i]=0;
